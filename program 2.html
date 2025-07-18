@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+    
+    <title>Document</title>
+</head>
+<body>
+    <h1>Number Guessing Program</h1>
+    <input type="number"placeholder="Enter the number" id="num">
+    <button onclick="playgame()">Guess</button>
+    <p id="Feedback"></p>
+    <p id="attempts"></p>
+    <script>
+        let target=Math.floor(Math.random()*50)+1;
+        console.log(target);
+        let count=0;
+
+    </script>
+    <script>
+        function playgame(){
+            let guessvalue=parseInt(document.getElementById("num").value);
+            count++;
+
+            if(guessvalue < target){
+                document.getElementById("Feedback").innerText="too low";
+
+            }
+            else if(guessvalue>target){
+                document.getElementById("Feedback").innerText="too high";
+            }
+            else{
+                document.getElementById("Feedback").innerText="your guess is correct";
+            }
+
+        }
+    </script>
+</body>
+</html>
