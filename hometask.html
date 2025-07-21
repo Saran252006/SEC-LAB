@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       
+let tasks = [];
+const addTask = (task, callback) => {
+    tasks.push(task);
+    callback();
+};
+const printTasks = () => {
+    console.log("Current Tasks:");
+    tasks.forEach((task, index) => console.log(`${index + 1}. ${task}`));
+};
+const greet = () => console.log("Welcome to Task Manager!");
+
+const farewell = function () {
+    console.log("Thank you!");
+};
+const addMultipleTasks = (callback, ...newTasks) => {
+    newTasks.forEach(task => tasks.push(task));
+    callback();
+};
+function scopeTest() {
+    var localVar = "local variable";
+    console.log(localVar); 
+}
+let globalVar = "global variable";
+scopeTest();
+console.log(globalVar); 
+greet();
+addTask("play cricket", printTasks);
+addTask("practice daily", printTasks);
+addMultipleTasks(printTasks, "code daily", "Write code", "do exercise");
+farewell();
+
+    </script>
+    
+</body>
+</html>
