@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jvascript</title>
+</head>
+<body>
+    <script>
+        //an array of object is a collection where each element is an object with propreties.
+        let details={
+            name:"js",
+            totalmark:100,
+            subject:{
+                java:100,
+                python:100
+            },
+            sum:function(){
+                let total=this.subject.java+this.subject.python;
+                return total;
+            }
+        }
+        
+        console.log(details.name);
+        console.log(details["totalmark"]);
+        console.log(details.subject.java);
+        console.log(details.subject.python);
+        console.log(details.sum());
+        //syntax in jvascript that allows you to extract valuse from object and asssign them  to variable in a clesn and readable way.
+        let person={
+            job:"frontend developer",
+            salary:20000,
+        }
+        const{job:firstkey,salary:secondkey}=person
+        console.log(firstkey+" "+secondkey); 
+        //array
+        let arr=new Array(1,2,"three");
+        console.log(arr[2]);
+        //another way
+        let arr2=["js",true,false];
+        //object destructure
+        const[name,b1,b2]=arr2;
+        console.log(name);
+        //filter-returns a new array containing only the element that match a condition
+      
+
+
+        
+
+    </script>
+
+
+    
+</body>
+</html>
