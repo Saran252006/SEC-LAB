@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function reverseWords(sentence) {
+            return sentence.split(" ").reverse().join(" ");
+        }
+
+        function removeDuplicates(arr) {
+            return [...new Set(arr)];
+        }
+
+        function countVowels(str) {
+            const vowels = 'aeiouAEIOU';
+            let count = 0;
+            for (let char of str) {
+                if (vowels.includes(char)) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        console.log("Reversed Words:", reverseWords("this is javascript language"));
+        console.log("Array without duplicates:", removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+        console.log("Number of vowels:", countVowels("kg college"));
+    </script>
+</body>
+</html>
