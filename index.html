@@ -1,22 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<script src="index.js"></script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document</title>
 </head>
 <body>
-    <form >
-        <label for="">enter the first number:</label>
-        <input type="number"><br>
-        <label for="">enter the second number:</label>
-        <input type="number"><br>
-        <button>add</button>
-        <button>sub</button>
-        <button>multi</button>
-        <button>div</button>
-    </form>
-    
+  <script>
+    let employee = [];
+    function addEmp(id, name, role, salary) {
+      employee.push({ id, name, role, salary });
+      console.log("Added:", { id, name, role, salary });
+    }
+    addEmp(1, "SANTHOSH", "developer", 10000);
+    addEmp(2, "VEL", "CEO", 20000);
+    console.log("All employees:", employee);
+    function calculateSal() {
+      let total = employee.reduce((sum, emp) => sum + emp.salary, 0);
+      console.log("Total salary:", total);
+      return total;
+    }
+    calculateSal();
+    function updateEmp(id, newDetail) {
+      let emp = employee.find((e) => e.id === id);
+      if (emp) {
+        Object.assign(emp, newDetail);
+        console.log("Updated employees:", employee);
+      } else {
+        console.log("Employee not found!");
+      }
+    }
+    updateEmp(1, { name: "SARAN" });
+    function removeEmp(index){
+    if(index >= 0 && index < employee.length){
+        employee.splice(index, 1);
+        console.log("deleted", employee);
+    } else {
+        console.log("emp not found");
+    }
+}
+removeEmp(0 )
+function searchEmp() {
+      let input = prompt("Enter the employee name?");
+      if (!input) {
+        console.log("Please enter a valid name.");
+        return;
+      }
+
+      let result = employee.filter(e =>
+        e.name.toLowerCase().includes(input.toLowerCase())
+      );
+
+      if (result.length > 0) {
+        console.log("Search Results:", result);
+      } else {
+        console.log("No matching employees found.");
+      }
+    }
+
+  
+
+    addEmp(1, "PRIYA", 40000, "Software Developer");
+    addEmp(2, "SARAN", 50000, "CEO");
+    console.log("All Employees:", employee);
+
+    calculateSal();
+
+    updateEmp(1, { name: "VEL" });
+
+    removeEmp(0); 
+
+    searchEmp(); 
+
+
+
+
+        
+  </script>
 </body>
 </html>
