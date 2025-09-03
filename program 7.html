@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JavaScript Stopwatch</h1>
+    <div id="display">00:00</div>
+    <button onclick="Start()">Start</button>
+    <button onclick="Stop()">Stop</button>
+    <button onclick="Reset()">Reset</button>
+    <script>
+        let seconds=0;//start the timer
+        let intervalId=null;//store the timer values
+        function updatedisplay(){
+            let minits=String(Math.floor(seconds / 60)).padStart(2,'0');
+            let secnds=String(seconds % 60).padStart(2,'0');
+            document.getElementById("display").innerText=`${minits}:${secnds}`;
+
+        }
+        function Start(){
+            if(!intervalId){
+                intervalId=setInterval(()=>{
+                    seconds++;
+                    updatedisplay();
+                },1000)
+                    
+            }
+
+        }
+        function Stop(){
+            clearInterval(intervalId);
+            intervalId=null;
+
+        }
+        function Reset(){
+            Stop();
+            seconds=0;
+            updatedisplay();
+
+        }
+        
+        
+
+    </script>
+  
+    
+</body>
+</html>
