@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Quantifiers:
+        // quantifiers specify how many times a character or group should appear.
+        let text="aaaba";
+        let pattern=/\a*/g;
+        let result=text.match(pattern);
+        console.log(result);
+        //*-->matches zero or more consecutive as,empty matches, at last it check once again.
+        //+-->doesnt allow empty space,consecutive as together.
+        //?-->matches zero at each position, at last it check once again.
+
+        //modifiers:
+        // modifiers(flag) change how regex matches.
+        //i-->case insensitive
+        //g-->global match (all occurrances)
+        //m-->multiline match
+        let sentence="javascript programming  language.\njava programming language."
+        let pattern2=/\programming+/igm;
+        let result2=sentence.match(pattern2);
+        console.log(result2);
+
+       /* Metacharacters:
+              metacharacters have special meaning in regex.
+
+        .-->any character expect newline
+        \d-->digit(0-9)
+        \w-->word character(letters,digits)
+        \s-->whitespace
+        ^-->start of starting line*/
+        let digitchar="001js";
+        let pattern3=/\d+/g;
+        let result3=sentence.match(pattern3);
+        
+
+        /* Grouping:
+           parenthess() are used to group patterns and capture submatches.
+        */
+        
+        let texts="hii velprasath";
+        let pattern4=/(\w+)\s+(\w+)/;
+        let result4=texts.match(pattern4);
+        console.log(result4);
+        console.log(result4[0]);
+        console.log(result4[1]);
+        console.log(result4[2]);
+
+        let fruit="apple banana apple grape";
+        let pattern5=/(apple)/;
+        let result5=pattern5.exec(fruit);
+        console.log(result5[0]);
+        console.log(result5[1]);
+
+      
+        let pattern6=/(apple)/g;
+        let result6=fruit.replace(pattern6,"orange");
+        console.log(result6);
+
+        let pattern7=/\s+/;
+        let result7=fruit.split(pattern7)
+        console.log(result7);
+        
+
+
+
+
+
+
+        
+        
+
+
+
+    </script>
+    
+</body>
+</html>
