@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <style>
+   body{
+    text-align: center;
+   }
+  </style>
+</head>
+<body>
+  <h2>To-Do List</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter task" />
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="taskList"></ul>
+  <script>
+  
+document.getElementById("taskInput").value = sessionStorage.getItem("tempTask") || "";
+
+
+document.getElementById("taskInput").addEventListener("input", function () {
+  sessionStorage.setItem("tempTask", this.value);
+});
+
+
+window.onload = function () {
+  loadTasks();
+};
+
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push({ text: text, completed: false });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  input.value = "";
+  sessionStorage.removeItem("tempTask");
+  loadTasks();
+}
+
+function loadTasks() {
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.textContent = task.text;
+    if (task.completed) li.classList.add("completed");
+
+    li.onclick = () => toggleTask(index);
+    
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.onclick = (e) => {
+      e.stopPropagation(); 
+      deleteTask(index);
+    };
+
+    li.appendChild(delBtn);
+    list.appendChild(li);
+  });
+}
+
+function toggleTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks[index].completed = !tasks[index].completed;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
+}
+
+function deleteTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks.splice(index, 1);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
+}
+
+  </script>
+
+ 
+</body>
+</html>
+
