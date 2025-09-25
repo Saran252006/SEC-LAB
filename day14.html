@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <script>
+        /*let tatkal=new Promise((resolve,reject)=>{
+            let avail=true
+            if(avail)
+               resolve()
+            else
+               reject()
+
+        })
+        .then(success)
+        .catch(failure)
+        function success(){
+            console.log("ticket available");
+
+        }
+        function failure(){
+            console.log("ticket closed");
+
+        }
+        function tosscoin(){
+             return new Promise((resolve,reject)=>{
+                let rand=Math.floor(Math.random()*2)
+                if(rand==0)
+                   resolve()
+                else
+                   reject()
+             })
+        }
+        tosscoin().then((rand)=>console.log(`congrats you win ${rand}`))
+        .catch((rand)=>console.log(`you lose ${rand}`))*/
+
+        async function reached(){
+              return "yes"
+        }
+        console.log(reached())
+        function placeorder(){
+            return new Promise((resolve,reject)=>{
+                console.log("try to placing the order...");
+                setTimeout(() => {
+                    resolve("ordered place successfully")
+                    
+                }, 2000);
+            })
+
+        }
+        async function trackdelivery(){
+            const steps=[
+                "preparing your order",
+                "order is ready to pickup",
+                "pickup by delivery partner",
+                "on the way to delivery ur order",
+                "nearby location",
+                "ordered delivery."
+            ]
+            for(let step of steps){
+                await new Promise((res)=>setTimeout(res,2000))
+                console.log(step)
+            }
+
+        }
+        //main flow
+        async function orderstatus(Paramas){
+            const status=await placeorder();
+            console.log(status);
+            trackdelivery()
+            
+        }
+        orderstatus();
+
+      </script>                                                                  
+</body>
+</html>
