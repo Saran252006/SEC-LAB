@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Session Tracker</title>
+  <style>
+    body{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2> User Session Tracker</h2>
+  <div style="text-align:center;">
+    <button id="addUserBtn">Add User</button>
+    <button id="removeUserBtn">Remove User</button>
+    <button id="updateUserBtn">Update Metadata</button>
+    <button id="cleanupBtn">Clean Inactive</button>
+  </div>
+
+  <pre id="output"></pre>
+
+  <script>
+    // Set to store unique active user IDs
+    const activeUsers = new Set();
+
+    // WeakMap to store user objects -> metadata (timestamp, etc.)
+    const userMetadata = new WeakMap();
+
+    // Store user objects separately so we can simulate GC
+    let users = [];
+
+    // Function to display current info
+    function displayStatus() {
+      const output = document.getElementById("output");
+      let result = "Active Users: " + [...activeUsers].join(", ") + "\n\n";
+      result += "Metadata (WeakMap cannot be directly viewed in console)\n";
+      result += "Use console.log(userMetadata) to inspect in browser DevTools.\n";
+      output.textContent = result;
+    }
+
+    // Add a user
+    function addUser() {
+      const userId = "user" + (users.length + 1);
+      const userObj = { id: userId };
+
+      activeUsers.add(userId);
+      userMetadata.set(userObj, { lastActive: new Date().toLocaleTimeString() });
+      users.push(userObj);
+
+      console.log(`✅ Added ${userId}`);
+      displayStatus();
+    }
+
+    // Remove a user
+    function removeUser() {
+      if (users.length === 0) {
+        alert("No users to remove!");
+        return;
+      }
+      const removedUser = users.pop();
+      activeUsers.delete(removedUser.id);
+
+      console.log(`❌ Removed ${removedUser.id}`);
+      displayStatus();
+    }
+
+    // Update a user's metadata
+    function updateMetadata() {
+      if (users.length === 0) {
+        alert("No users to update!");
+        return;
+      }
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+      const data = userMetadata.get(randomUser);
+      if (data) {
+        data.lastActive = new Date().toLocaleTimeString();
+        userMetadata.set(randomUser, data);
+        console.log(`🕒 Updated ${randomUser.id} last active time.`);
+      }
+      displayStatus();
+    }
+
+    // Clean up inactive users (simulate GC)
+    function cleanInactiveUsers() {
+      if (users.length > 0) {
+        users.pop(); // remove reference to last user (GC can reclaim)
+        console.log("🧹 One user reference removed — GC can now collect it if not referenced elsewhere.");
+      } else {
+        console.log("No users left to clean up.");
+      }
+      displayStatus();
+    }
+
+    // Event listeners
+    document.getElementById("addUserBtn").addEventListener("click", addUser);
+    document.getElementById("removeUserBtn").addEventListener("click", removeUser);
+    document.getElementById("updateUserBtn").addEventListener("click", updateMetadata);
+    document.getElementById("cleanupBtn").addEventListener("click", cleanInactiveUsers);
+
+    // Initial display
+    displayStatus();
+  </script>
+</body>
+</html>
