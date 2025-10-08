@@ -63,7 +63,7 @@
     const ratingError = document.getElementById("ratingError");
     const recommendError = document.getElementById("recommendError");
 
-    // Real-time feedback with focus and blur
+    
     const inputs = [nameInput, emailInput, ratingSelect, recommendCheckbox];
     inputs.forEach((el) => {
       el.addEventListener("focus", () => el.classList.add("highlight"));
@@ -73,7 +73,7 @@
       });
     });
 
-    // Mouse & keyboard interactivity
+   
     submitBtn.addEventListener("mouseenter", () => {
       submitBtn.style.backgroundColor = "#42a5f5";
     });
@@ -84,12 +84,12 @@
       nameInput.style.borderColor = "#81d4fa";
     });
 
-    // Form validation
+  
     form.addEventListener("submit", (event) => {
       event.preventDefault(); // prevent reload
       let valid = true;
 
-      // Name validation
+   
       if (nameInput.value.trim() === "") {
         nameError.textContent = "Name is required.";
         valid = false;
@@ -97,7 +97,7 @@
         nameError.textContent = "";
       }
 
-      // Email validation
+     
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (emailInput.value.trim() === "") {
         emailError.textContent = "Email is required.";
@@ -109,7 +109,6 @@
         emailError.textContent = "";
       }
 
-      // Rating validation
       if (ratingSelect.value === "") {
         ratingError.textContent = "Please select a rating.";
         valid = false;
@@ -117,7 +116,7 @@
         ratingError.textContent = "";
       }
 
-      // Checkbox validation
+    
       if (!recommendCheckbox.checked) {
         recommendError.textContent = "Please check this box.";
         valid = false;
@@ -126,10 +125,11 @@
       }
 
       if (valid) {
-        alert("✅ Feedback submitted successfully!");
+        alert(" Feedback submitted successfully!");
         form.reset();
       }
     });
   </script>
 </body>
 </html>
+
