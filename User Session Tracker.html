@@ -22,16 +22,16 @@
   <pre id="output"></pre>
 
   <script>
-    // Set to store unique active user IDs
+   
     const activeUsers = new Set();
 
-    // WeakMap to store user objects -> metadata (timestamp, etc.)
+  
     const userMetadata = new WeakMap();
 
-    // Store user objects separately so we can simulate GC
+ 
     let users = [];
 
-    // Function to display current info
+  
     function displayStatus() {
       const output = document.getElementById("output");
       let result = "Active Users: " + [...activeUsers].join(", ") + "\n\n";
@@ -40,7 +40,7 @@
       output.textContent = result;
     }
 
-    // Add a user
+   
     function addUser() {
       const userId = "user" + (users.length + 1);
       const userObj = { id: userId };
@@ -49,11 +49,10 @@
       userMetadata.set(userObj, { lastActive: new Date().toLocaleTimeString() });
       users.push(userObj);
 
-      console.log(`✅ Added ${userId}`);
+      console.log(` Added ${userId}`);
       displayStatus();
     }
 
-    // Remove a user
     function removeUser() {
       if (users.length === 0) {
         alert("No users to remove!");
@@ -62,11 +61,11 @@
       const removedUser = users.pop();
       activeUsers.delete(removedUser.id);
 
-      console.log(`❌ Removed ${removedUser.id}`);
+      console.log(` Removed ${removedUser.id}`);
       displayStatus();
     }
 
-    // Update a user's metadata
+  
     function updateMetadata() {
       if (users.length === 0) {
         alert("No users to update!");
@@ -77,30 +76,31 @@
       if (data) {
         data.lastActive = new Date().toLocaleTimeString();
         userMetadata.set(randomUser, data);
-        console.log(`🕒 Updated ${randomUser.id} last active time.`);
+        console.log(` Updated ${randomUser.id} last active time.`);
       }
       displayStatus();
     }
 
-    // Clean up inactive users (simulate GC)
+  
     function cleanInactiveUsers() {
       if (users.length > 0) {
-        users.pop(); // remove reference to last user (GC can reclaim)
-        console.log("🧹 One user reference removed — GC can now collect it if not referenced elsewhere.");
+        users.pop(); )
+        console.log(" One user reference removed — GC can now collect it if not referenced elsewhere.");
       } else {
         console.log("No users left to clean up.");
       }
       displayStatus();
     }
 
-    // Event listeners
+    
     document.getElementById("addUserBtn").addEventListener("click", addUser);
     document.getElementById("removeUserBtn").addEventListener("click", removeUser);
     document.getElementById("updateUserBtn").addEventListener("click", updateMetadata);
     document.getElementById("cleanupBtn").addEventListener("click", cleanInactiveUsers);
 
-    // Initial display
+  
     displayStatus();
   </script>
 </body>
 </html>
+
