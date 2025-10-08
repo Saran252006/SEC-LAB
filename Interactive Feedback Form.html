@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Feedback Form</title>
+  <style>
+    body{
+      text-align: center;
+      
+    }
+    form{
+      padding: 20px;
+      
+    }
+    input{
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Interactive Feedback Form</h2>
+
+  <form id="feedbackForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" />
+    <div id="nameError" class="error"></div>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" placeholder="Enter your email" />
+    <div id="emailError" class="error"></div>
+
+    <label for="rating">Rate your experience:</label>
+    <select id="rating">
+      <option value="">Select rating</option>
+      <option value="Excellent">Excellent</option>
+      <option value="Good">Good</option>
+      <option value="Average">Average</option>
+      <option value="Poor">Poor</option>
+    </select>
+    <div id="ratingError" class="error"></div>
+
+    <label>Would you recommend us?</label>
+    <input type="checkbox" id="recommend" /> Yes
+    <div id="recommendError" class="error"></div>
+
+    <label for="comments">Comments:</label>
+    <textarea id="comments" rows="4" placeholder="Your feedback..."></textarea>
+
+    <button type="submit" id="submitBtn">Submit</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("feedbackForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const ratingSelect = document.getElementById("rating");
+    const recommendCheckbox = document.getElementById("recommend");
+    const submitBtn = document.getElementById("submitBtn");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const ratingError = document.getElementById("ratingError");
+    const recommendError = document.getElementById("recommendError");
+
+    // Real-time feedback with focus and blur
+    const inputs = [nameInput, emailInput, ratingSelect, recommendCheckbox];
+    inputs.forEach((el) => {
+      el.addEventListener("focus", () => el.classList.add("highlight"));
+      el.addEventListener("blur", () => el.classList.remove("highlight"));
+      el.addEventListener("change", () => {
+        el.style.borderColor = "#42a5f5";
+      });
+    });
+
+    // Mouse & keyboard interactivity
+    submitBtn.addEventListener("mouseenter", () => {
+      submitBtn.style.backgroundColor = "#42a5f5";
+    });
+    submitBtn.addEventListener("mouseleave", () => {
+      submitBtn.style.backgroundColor = "#1565c0";
+    });
+    nameInput.addEventListener("keypress", () => {
+      nameInput.style.borderColor = "#81d4fa";
+    });
+
+    // Form validation
+    form.addEventListener("submit", (event) => {
+      event.preventDefault(); // prevent reload
+      let valid = true;
+
+      // Name validation
+      if (nameInput.value.trim() === "") {
+        nameError.textContent = "Name is required.";
+        valid = false;
+      } else {
+        nameError.textContent = "";
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput.value.trim() === "") {
+        emailError.textContent = "Email is required.";
+        valid = false;
+      } else if (!emailPattern.test(emailInput.value)) {
+        emailError.textContent = "Enter a valid email address.";
+        valid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      // Rating validation
+      if (ratingSelect.value === "") {
+        ratingError.textContent = "Please select a rating.";
+        valid = false;
+      } else {
+        ratingError.textContent = "";
+      }
+
+      // Checkbox validation
+      if (!recommendCheckbox.checked) {
+        recommendError.textContent = "Please check this box.";
+        valid = false;
+      } else {
+        recommendError.textContent = "";
+      }
+
+      if (valid) {
+        alert("✅ Feedback submitted successfully!");
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
