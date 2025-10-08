@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Driven Calculator</title>
+</head>
+<body>
+  <h2>Menu Driven Calculator</h2>
+  <script>
+    let choice;
+
+    do {
+      choice = prompt(
+        "Choose an option:\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Exit"
+      );
+
+      switch (choice) {
+        case "1": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+          
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue; 
+          }
+
+          a = Number(a);
+          b = Number(b);
+          alert("Result = " + (a + b));
+          break;
+        }
+
+        case "2": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue;
+          }
+
+          a = Number(a);
+          b = Number(b);
+          alert("Result = " + (a - b));
+          break;
+        }
+
+        case "3": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue;
+          }
+
+          a = Number(a);
+          b = Number(b);
+          alert("Result = " + (a * b));
+          break;
+        }
+
+        case "4": {
+          let a = prompt("Enter first number:");
+          let b = prompt("Enter second number:");
+
+          if (isNaN(a) || isNaN(b)) {
+            alert("Invalid input! Please enter valid numbers.");
+            continue;
+          }
+
+          a = Number(a);
+          b = Number(b);
+          if (b === 0) {
+            alert("Cannot divide by zero!");
+            continue;
+          }
+
+          alert("Result = " + (a / b));
+          break;
+        }
+
+        case "5":
+          alert("Exiting the program...");
+          break;
+
+        default:
+          alert("Invalid choice! Please select between 1-5.");
+          continue; 
+      }
+    } while (choice !== "5");
+  </script>
+</body>
+</html>
