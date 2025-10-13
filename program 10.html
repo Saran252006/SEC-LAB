@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch API - User Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #status {
+      font-weight: bold;
+      color: blue;
+    }
+    #userData {
+      margin-top: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>User Information Dashboard</h2>
+  <button onclick="loadUsers()">Load Users</button>
+  <p id="status"></p>
+  <div id="userData"></div>
+
+  <script>
+    function loadUsers() {
+      const status = document.getElementById('status');
+      const output = document.getElementById('userData');
+      
+      // Clear previous output
+      status.textContent = 'Loading...';
+      output.innerHTML = '';
+
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          status.textContent = ''; // Clear loading message
+          
+          // Display user data in a list
+          const listHTML = data.map(user =>
+            `<li><strong>${user.name}</strong> - ${user.email} - ${user.address.city}</li>`
+          ).join('');
+          
+          output.innerHTML = `<ul>${listHTML}</ul>`;
+        })
+        .catch(error => {
+          status.textContent = 'Failed to load data.';
+          status.classList.add('error');
+          console.error('Fetch error:', error);
+        });
+    }
+  </script>
+</body>
+</html>
